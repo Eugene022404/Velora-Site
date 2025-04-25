@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELORA - Adventure and freedom with every pedal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #380000;
+            color: #fff;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        /* Divider */
+        .divider {
+            border-top: 1px solid #eee;
+            margin: 0 5%;
+        }
+        
+        /* Page Content */
+        .page-content {
+            display: none;
+            padding: 80px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        /* Maintenance Page */
+        #maintenance-page {
+            text-align: center;
+        }
+        #maintenance-page img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
+        }
+        
+        #maintenance-page h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+        
+        #maintenance-page p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Contact Page Styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background-color: #f8f8f8;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-card h3 {
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .contact-card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-card p:last-child {
+            color: #000000;
+            font-weight: 500;
+       }
+        
+        /* Home Page */
+        #home-page h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        #home-page p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .download-btn {
+            background-color: #380000;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        
+        /* About Page */
+        #about-page h1, #terms-page h1, #features-page h1, #maintenance-page h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        
+        #about-page h2, #terms-page h2, #features-page h2 {
+            font-size: 28px;
+            margin: 40px 0 20px 0;
+            color: #000;
+        }
+        
+        #about-page h3, #terms-page h3, #features-page h3 {
+            font-size: 22px;
+            margin: 30px 0 15px 0;
+            color: #333;
+        }
+        
+        #about-page p, #terms-page p, #features-page p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+        
+        #about-page ul, #terms-page ul, #features-page ul {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        #about-page li, #terms-page li, #features-page li {
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            color: #222;
+        }
+        
+        .section-divider {
+            border-top: 1px solid #eee;
+            margin: 50px 0;
+        }
+        
+        /* Features Page Specific Styles */
+        #features-page ol {
+            margin-left: 20px;
+            counter-reset: feature-counter;
+        }
+        
+        #features-page ol li {
+            counter-increment: feature-counter;
+            margin-bottom: 30px;
+            list-style: none;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        #features-page ol li::before {
+            content: counter(feature-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #380000;
+        }
+        
+        #features-page ol li h3 {
+            margin-top: 0;
+        }
+        
+        /* Footer Sections */
+        .footer-sections {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 60px 10%;
+            background-color: #f8f8f8;
+        }
+        
+        .footer-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .copyright p {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        /* Final Logo */
+        .final-logo {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+        }
+        
+        /* Footer */
+        .windows-footer {
+            padding: 20px 5%;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="images/logo velora.png" alt="VELORA Logo" style="height: 40px;">
+        </div>
+        <div class="nav-links">
+            <a href="#" onclick="showPage('features-page')">FEATURES</a>
+            <a href="#" onclick="showPage('about-page')">ABOUT</a>
+            <a href="#" onclick="showPage('home-page')">DOWNLOAD</a>
+        </div>
+    </nav>
+    
+    <!-- Divider -->
+    <div class="divider"></div>
+    
+    <!-- Home Page -->
+    <section id="home-page" class="page-content active">
+        <h1>Adventure and freedom with every pedal.</h1>
+        <p>At Velora, no person takes that insight exploration, deliver up the performance, and connect you to the world around you. Whether you're chasing the thrill of the trail, cruising scenic roads, or commuting with ease</p>
+        <a href="#" class="download-btn">DOWNLOAD APK</a>
+    </section>
+    
+    <!-- Features Page -->
+    <section id="features-page" class="page-content">
+        <h1>Software Features</h1>
+        
+        <ol>
+            <li>
+                <h3>Planning and Scheduling</h3>
+                <p>To plan the cyclist routes and schedule their rides</p>
+            </li>
+            
+            <li>
+                <h3>Weather and Traffic API</h3>
+                <p>To notify the cyclist about the weather that day and how heavy the traffic was.</p>
+            </li>
+            
+            <li>
+                <h3>Community Building and Sharing</h3>
+                <p>It is a SocMed platform where cyclists can collaborate and share information about anything that is connected on bikes.</p>
+            </li>
+            
+            <li>
+                <h3>Artificial Intelligence</h3>
+                <p>It answers all the users questions.</p>
+            </li>
+        </ol>
+    </section>
+    
+    <!-- About Page -->
+    <section id="about-page" class="page-content">
+        <h1>About</h1>
+        <p>Welcome to VELORA, the ultimate cycling companion that helps you plan, track, and share your cycling adventures. Whether you're an experienced cyclist or just starting out, our app is designed to empower you with the tools you need.</p>
+        
+        <p>At VELORA we're passionate about cycling and the freedom it brings. Our app is built to enhance your cycling experience by offering three key features:</p>
+        
+        <h2>Plan Your Routes</h2>
+        <p>Easily create custom cycling routes based on your preferences and needs. Whether you're looking for a scenic ride, a challenging course, or a quick commute, our route planner helps you map out your perfect cycling adventure.</p>
+        
+        <h2>Track Your Performance</h2>
+        <p>Monitor your progress in real-time with detailed statistics on your speed, distance, elevation, and time. Whether you're training for a race or just trying to stay fit, our tracking tools help you keep track of your cycling goals.</p>
+        
+        <h2>Share Your Journey</h2>
+        <p>Share your rides, achievements, and routes with friends, family, and the cycling community. With the ability to share on social media or within the app, you can inspire others and stay connected with fellow cyclists.</p>
+        
+        <div class="section-divider"></div>
+        
+        <h2>Why Choose VELORA?</h2>
+        
+        <ul>
+            <li><span class="feature-title">User-Friendly Interface:</span> Our intuitive and easy-to-navigate app ensures a seamless experience, whether you're planning your next ride or reviewing past performances.</li>
+            
+            <li><span class="feature-title">Personalized Experience:</span> Tailor the app to fit your unique cycling goals, preferences, and training routines.</li>
+            
+            <li><span class="feature-title">Community Engagement:</span> Join a vibrant community of cyclists. Share tips, explore new routes, and celebrate your cycling milestones with others.</li>
+            
+            <li><span class="feature-title">Reliable Tracking:</span> Our precise tracking system gives you accurate data, so you can monitor your progress and make improvements over time.</li>
+        </ul>
+        
+        <div class="section-divider"></div>
+        
+        <h2>Join the VELORA Community</h2>
+        <p>Cycling is more than just a sport—it's a lifestyle. Whether you're commuting, training, or exploring, VELORA is here to support you on every ride. Join our growing community of cycling enthusiasts and take your cycling journey to the next level!</p>
+        
+        <p>Thank you for choosing VELORA. We're excited to be part of your cycling adventure!</p>
+    </section>
+    
+    <!-- Terms Page -->
+    <section id="terms-page" class="page-content">
+        <h1>Terms & Conditions</h1>
+        <p><strong>Effective Date:</strong> December 5th, 2024</p>
+        
+        <p>Welcome to VELORA! These Terms and Conditions ("Terms") govern your access to and use of our cycling app, including its features for planning, tracking, and sharing your cycling activities. By using VELORA, you agree to be bound by these Terms, as well as our Privacy Policy, which is incorporated into these Terms by reference. If you do not agree to these Terms, you must not use our app.</p>
+        
+        <h2>1. Acceptance of Terms</h2>
+        <p>By downloading, installing, or using VELORA ("the App"), you acknowledge and agree to abide by these Terms and any future updates or amendments. We may revise these Terms from time to time, and such changes will be effective when posted in the app or on our website. Your continued use of the App after any changes constitutes your acceptance of the updated Terms.</p>
+        
+        <h2>2. Account Registration</h2>
+        <p>To use certain features of the App, you may be required to create an account. You agree to provide accurate, current, and complete information during the registration process, and to update such information if it changes. You are responsible for maintaining the confidentiality of your account information, including your password, and for all activities that occur under your account.</p>
+        
+        <h2>3. App Features</h2>
+        <p>VELORA provides the following key features:</p>
+        <ul>
+            <li><strong>Plan:</strong> Create custom cycling routes and events.</li>
+            <li><strong>Track:</strong> Log and track your cycling activities, including distance, speed, time, and elevation.</li>
+            <li><strong>Share:</strong> Share your cycling achievements and routes with other users or on social media.</li>
+        </ul>
+        
+        <h2>4. User Content</h2>
+        <p>You retain ownership of any content you create or upload to the App ("User Content"). By submitting User Content, you grant VELORA a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and display your User Content for the purpose of operating and improving the App.</p>
+        
+        <h2>5. Privacy</h2>
+        <p>Your use of the App is also governed by our Privacy Policy, which outlines how we collect, use, and protect your personal data. Please read the Privacy Policy carefully before using the App.</p>
+        
+        <h2>6. Prohibited Activities</h2>
+        <p>When using the App, you agree not to:</p>
+        <ul>
+            <li>Violate any laws or regulations</li>
+            <li>Infringe on intellectual property rights</li>
+            <li>Upload harmful or malicious content</li>
+            <li>Attempt to gain unauthorized access to other accounts</li>
+            <li>Interfere with the proper functioning of the App</li>
+        </ul>
+        
+        <h2>7. Disclaimer of Warranties</h2>
+        <p>The App is provided "as is" without warranties of any kind, either express or implied. VELORA does not warrant that the App will be uninterrupted, error-free, or meet your specific requirements.</p>
+        
+        <h2>8. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, VELORA, its affiliates, and its employees are not liable for any indirect, incidental, special, or consequential damages, including but not limited to loss of data, business interruption, or personal injury, arising out of or in connection with your use of the App.</p>
+        
+        <h2>9. Termination</h2>
+        <p>We reserve the right to suspend or terminate your access to the App at any time, without notice, if we believe you have violated these Terms. You may also delete your account at any time by following the instructions in the App settings.</p>
+    </section>
+
+    <!-- Maintenance Page (New Addition) -->
+    <section id="maintenance-page" class="page-content">
+        <img 
+        src="images/under maintenance.png" 
+        alt="Under Maintenance Illustration"
+    >
+        <p>Our subscription and pricing section is currently being updated. We will back soon!</p>
+        
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact-page" class="page-content">
+    <h1>Contact Us</h1>
+    <p>You can get in touch with us in any of the below ways:</p>
+    
+    <div class="contact-grid">
+        <div class="contact-card">
+            <h3>Paul Jericho A. Libanan</h3>
+            <p>09673123157</p>
+            <p>libanan.pauljericho.bscs2022@gmail.com</p>
+        </div>
+        
+        <div class="contact-card">
+            <h3>Armando E. Bagason Jr.</h3>
+            <p>09701339979</p>
+            <p>bagasonjr.armando.bscs2022@gmail.com</p>
+        </div>
+        
+        <div class="contact-card">
+            <h3>James Daryll S. Paglinawan</h3>
+            <p>09916820796</p>
+            <p>paglinawan.jamesdaryll.bscs2022@gmail.com</p>
+        </div>
+        
+        <div class="contact-card">
+            <h3>Audric S. Suarez</h3>
+            <p>093702216</p>
+            <p>audric.suarez.bscs2022@gmail.com</p>
+        </div>
+        
+        <div class="contact-card">
+            <h3>Khen Hurryson E. Granadozo</h3>
+            <p>09568736018</p>
+            <p>granadozo.khenhurryson.bscs2022@gmail.com</p>
+        </div>
+        
+        <div class="contact-card">
+            <h3>Eugene PV D Gomez</h3>
+            <p>09568732849</p>
+            <p>gomez.eugenepv.bscs2022@gmail.com</p>
+        </div>
+    </div>
+    </section>
+    
+    <!-- Footer Sections -->
+    <div class="footer-sections">
+        <div class="footer-section">
+            <h2>Policies</h2>
+            <h3>Privacy Policy</h3>
+            <a href="#" onclick="showPage('terms-page')">Terms and Conditions</a>
+        </div>
+        
+        <div class="footer-section">
+            <h2>Resources</h2>
+            <h3>Community</h3>
+            <a href="#" onclick="showPage('contact-page')">Contact Us</a>
+        </div>
+        
+        <div class="footer-section">
+            <h2>Membership</h2>
+            <h3>Subscription</h3>
+            <a href="#" onclick="showPage('maintenance-page')">Plans & Pricing</a>
+        </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="copyright">
+        <p>Velora 2024</p>
+    </div>
+    
+    <!-- Divider -->
+    <div class="divider"></div>
+    
+    <!-- Final Logo -->
+    <div class="final-logo">VELORA</div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Prevent default anchor behavior
+            return false;
+        }
+    </script>
+</body>
+</html>
